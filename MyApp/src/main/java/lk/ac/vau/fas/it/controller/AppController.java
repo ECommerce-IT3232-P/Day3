@@ -16,10 +16,12 @@ import lk.ac.vau.fas.it.model.Student;
 public class AppController {
 	
 	Student Bob= new Student("2020ict44","Bob",24,"IT",3.2);
-	Student Ann= new Student("2020ict45","Ann",24,"IT",3.1);
+	Student Ann= new Student("2020ict45","Ann",22,"IT",3.1);
 	Student Suu= new Student("2020ict46","Suu",24,"IT",3.0);
 	
 	List<Student> students=new ArrayList<Student>();
+	List<Student> studentsAge=new ArrayList<Student>();
+	
 	
 	@GetMapping("/msg")
 	public String myMessage() {
@@ -57,6 +59,18 @@ public class AppController {
 		   }
 		   
 		   return null;
+	   }
+	 @GetMapping("/ages")
+	   public List<Student> getStudentAge()
+	   {
+		  for(Student stu:students)
+		  {
+			  if(stu.getAge() > 19 && stu.getAge() < 24)
+			  {
+				  studentsAge.add(stu);
+			  }
+		  }
+		  return studentsAge;
 	   }
 	   
 }
