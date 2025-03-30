@@ -15,9 +15,9 @@ import lk.ac.vau.fas.it.model.Student;
 @RequestMapping("/app")
 public class AppController {
 	
-	Student Bob= new Student("2020/ict/44","Bob",24,"IT",3.2);
-	Student Ann= new Student("2020/ict/45","Ann",24,"IT",3.1);
-	Student Suu= new Student("2020/ict/46","Suu",24,"IT",3.0);
+	Student Bob= new Student("2020ict44","Bob",24,"IT",3.2);
+	Student Ann= new Student("2020ict45","Ann",24,"IT",3.1);
+	Student Suu= new Student("2020ict46","Suu",24,"IT",3.0);
 	
 	List<Student> students=new ArrayList<Student>();
 	
@@ -45,4 +45,18 @@ public class AppController {
 		return students;
 	}
 
+	 @GetMapping("/students/{rg}")
+	   public Student getStudentReg(@PathVariable("rg") String regNo)
+	   {
+		   for(Student stu:students)
+		   {
+			   if(stu.getRegNo().equals(regNo))
+			   {
+				   return stu;
+			   }
+		   }
+		   
+		   return null;
+	   }
+	   
 }
