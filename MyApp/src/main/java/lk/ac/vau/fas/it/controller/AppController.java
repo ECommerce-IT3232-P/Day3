@@ -21,6 +21,7 @@ public class AppController {
 	
 	List<Student> students=new ArrayList<Student>();
 	List<Student> studentsAge=new ArrayList<Student>();
+	List<Student> sortedStudents = new ArrayList<>(students);
 	
 	
 	@GetMapping("/msg")
@@ -60,7 +61,7 @@ public class AppController {
 		   
 		   return null;
 	   }
-	 @GetMapping("/ages")
+	 @GetMapping("/students/ages")
 	   public List<Student> getStudentAge()
 	   {
 		  for(Student stu:students)
@@ -73,4 +74,22 @@ public class AppController {
 		  return studentsAge;
 	   }
 	   
+	 @GetMapping("/students/gpa")
+	   public List<Student> getstudentGpa()
+	   {
+		   for (int i = 0; i < sortedStudents.size() - 1; i++) 
+		   {
+		        for (int j = 0; j < sortedStudents.size() - i - 1; j++)
+		        {
+		            if (sortedStudents.get(j).getGpa() > sortedStudents.get(j + 1).getGpa())
+		            {
+		                Student temp = sortedStudents.get(j);
+		                sortedStudents.set(j, sortedStudents.get(j + 1));
+		                sortedStudents.set(j + 1, temp);
+		            }
+		        }
+		    }
+		    
+		    return sortedStudents;
+	   }
 }
